@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Trip } from 'models';
 import getTripsData from 'lib/trips';
@@ -19,6 +19,19 @@ export default function Home({ allTripsData }: Props): JSX.Element {
   const [currentTrip, setCurrentTrip] = useState(allTripsData[0]);
   const [currentPhoto, setCurrentPhoto] = useState(null);
   const [asideOpen, setAsideOpen] = useState(false);
+
+  useEffect(() => {
+    if (window.location.hash.length === 0) {
+      window.location.hash = currentTrip.name;
+    } else {
+      const index = allTripsData.findIndex((t) => t.name === window.location.hash.substr(1));
+      if (index > -1) setCurrentTrip(allTripsData[index]);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.location.hash = currentTrip.name;
+  }, [currentTrip]);
 
   function handleMarkerClick(photo: string) {
     const index = currentTrip.photos.findIndex((p) => p.name === photo);
