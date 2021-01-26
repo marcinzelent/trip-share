@@ -5,6 +5,7 @@ import { FeatureCollection, LineString } from 'geojson';
 import { gpx } from '@tmcw/togeojson';
 import gb from 'geojson-bounds';
 import * as ExifReader from 'exifreader';
+import _ from 'lodash';
 
 import { Trip, Photo } from 'models';
 import { distanceBetween } from 'lib/util';
@@ -94,7 +95,7 @@ export default function getTripsData(): Trip[] {
       // eslint-disable-next-line global-require, import/no-dynamic-require, @typescript-eslint/no-var-requires
       const { src } = require(`trips/${dir}/${p}`);
       return {
-        name: p,
+        name: _.kebabCase(p),
         src,
         ...getPhotoMetadata(path.join(dirPath, p)),
       };
