@@ -5,8 +5,9 @@ photos.
 
 ## Preview
 
-| ![Desktop](./screenshots/desktop.png) | ![Mobile](./screenshots/mobile.png) |
+| Desktop                               | Mobile                              |
 | ------------------------------------- | ----------------------------------- |
+| ![Desktop](./screenshots/desktop.png) | ![Mobile](./screenshots/mobile.png) |
 
 You can also see a demo at https://zelent.net/trips.
 
