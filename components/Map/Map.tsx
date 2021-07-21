@@ -55,7 +55,7 @@ export default function Map({ trip, handleMarkerClick }: Props): JSX.Element {
                   <>
                     <img
                       style={{ width: 36, height: 36 }}
-                      src={`data:image/jpg;base64,${cluster[0].thumbnail}`}
+                      src={cluster[0].thumbnail}
                       alt=""
                     />
                     <span className={styles.markerItemCount}>{markerCluster.getChildCount()}</span>
@@ -77,7 +77,7 @@ export default function Map({ trip, handleMarkerClick }: Props): JSX.Element {
           position={[photo.latitude, photo.longitude]}
           icon={
             new Icon({
-              iconUrl: `data:image/jpg;base64,${photo.thumbnail}`,
+              iconUrl: photo.thumbnail,
               iconSize: [36, 36],
               className: styles.markerIcon,
             })

@@ -21,7 +21,6 @@ function getPhotoMetadata(filePath: string) {
     latitude: tags.gps.Latitude,
     longitude: tags.gps.Longitude,
     time: tags.exif.DateTime.description.replace(':', '-').replace(':', '-'),
-    thumbnail: tags.Thumbnail.base64,
   };
 }
 
@@ -93,10 +92,10 @@ export default function getTripsData(): Trip[] {
     const photoFiles = files.filter((f) => f.endsWith('.jpg'));
     const photos: Photo[] = photoFiles.map((p) => {
       // eslint-disable-next-line global-require, import/no-dynamic-require, @typescript-eslint/no-var-requires
-      const { src } = require(`trips/${dir}/${p}`);
       return {
         name: _.kebabCase(p),
-        src,
+        src: require(`trips/${dir}/${p}`).src,
+        thumbnail: require(`trips/${dir}/${p}?resize&sizes[]=36`).src,
         ...getPhotoMetadata(path.join(dirPath, p)),
       };
     });
