@@ -1,51 +1,21 @@
 {
-  "extends": [
-    "airbnb",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "prettier/react",
-    "plugin:prettier/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript"
-  ],
-  "plugins": ["@typescript-eslint"],
-  "parser": "@typescript-eslint/parser",
-  "env": { "browser": true, "node": true, "es6": true },
-  "parserOptions": {
-    "sourceType": "module"
-  },
-  "rules": {
-    "prettier/prettier": "error",
-    "react/prop-types": "off",
-    "jsx-a11y/anchor-is-valid": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": [
-      "error",
-      {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    ],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never",
-        "d.ts": "never"
-      }
-    ]
-  },
-  "settings": {
-    "import/extensions": [".js", ".jsx", ".ts", ".tsx", ".d.ts"],
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx", ".d.ts"]
+    "env": {
+        "browser": true,
+        "es2021": true
     },
-    "import/resolver": {
-      "typescript": {}
-    }
-  }
+    "extends": [
+        "plugin:react/recommended",
+        "standard-with-typescript",
+        "prettier"
+    ],
+    "overrides": [
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": ["./tsconfig.json"]
+    },
+    "plugins": [
+        "react"
+    ]
 }

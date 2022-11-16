@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg794"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="finish.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview796"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.4912879"
+     inkscape:cx="158.25248"
+     inkscape:cy="183.73381"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs791">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Checkerboard"
+       id="pattern3547"
+       patternTransform="matrix(19.072464,0,0,18.882704,1.6857833,2.2477111)" />
+    <pattern
+       inkscape:collect="always"
+       patternUnits="userSpaceOnUse"
+       width="2"
+       height="2"
+       patternTransform="translate(0,0) scale(10,10)"
+       id="Checkerboard"
+       inkscape:stockid="Checkerboard"
+       inkscape:isstock="true">
+      <rect
+         style="fill:black;stroke:none"
+         x="0"
+         y="0"
+         width="1"
+         height="1"
+         id="rect2441" />
+      <rect
+         style="fill:black;stroke:none"
+         x="1"
+         y="1"
+         width="1"
+         height="1"
+         id="rect2443" />
+    </pattern>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter12674"
+       x="-0.11478432"
+       y="-0.11478432"
+       width="1.2500658"
+       height="1.2500658">
+      <feFlood
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood12664" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite12666" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="3"
+         result="blur"
+         id="feGaussianBlur12668" />
+      <feOffset
+         dx="2"
+         dy="2"
+         result="offset"
+         id="feOffset12670" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite12672" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:export-filename="finish.png"
+     inkscape:export-xdpi="5.0799999"
+     inkscape:export-ydpi="5.0799999"
+     transform="matrix(0.94720019,0,0,0.94720019,9.4598319,9.4598319)">
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:8;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter12674)"
+       id="circle10159"
+       cx="50"
+       cy="50"
+       r="48.787151" />
+    <path
+       id="rect3398"
+       style="display:inline;fill:url(#pattern3547);fill-opacity:1;stroke:none;stroke-width:2.486;stroke-opacity:1"
+       d="M 50.000049,1.2128459 A 48.787151,48.787151 0 0 0 1.2128459,50.000049 48.787151,48.787151 0 0 0 50.000049,98.787252 48.787151,48.787151 0 0 0 98.787252,50.000049 48.787151,48.787151 0 0 0 50.000049,1.2128459 Z"
+       inkscape:export-filename=".\rect3398.png"
+       inkscape:export-xdpi="5.0799999"
+       inkscape:export-ydpi="5.0799999" />
+    <circle
+       style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:8;stroke-dasharray:none;stroke-opacity:1"
+       id="circle3478"
+       cx="50"
+       cy="50"
+       r="48.787151" />
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+.tileLayerControl {
+    width: 64px;
+    height: 64px;
+}
+
+.map {
+    background-image: url('/public/icons/map.png');
+}
+
+.satellite {
+    background-image: url('/public/icons/satellite.png');
+}
+
+.tileLayerControl button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+}
+
