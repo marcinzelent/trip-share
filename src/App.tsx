@@ -4,12 +4,13 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import Sidebar from './components/Sidebar/Sidebar';
 import Map from './components/Map/Map';
 import { createLightbox } from './components/Lightbox/Lightbox';
+import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import { MediaType, Trip } from './models';
 import { isTrip } from './models/index.guard';
+import { getObjectProperty } from './lib/util';
 
 import styles from './App.module.css';
 import 'photoswipe/style.css';
-import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 
 function App(): JSX.Element {
   const [allTrips, setAllTrips] = useState<Trip[]>([]);
@@ -49,39 +50,55 @@ function App(): JSX.Element {
     }
   }
 
-  async function getTrip(url: string): Promise<Trip | undefined> {
+  async function getTrip(trip: Trip): Promise<Trip | undefined> {
     try {
-      if (url === undefined) {
+      if (trip.url === undefined) {
         return;
       }
 
-      const res = await fetch(url);
+      const res = await fetch(trip.url);
       const data: Trip = await res.json();
 
       if (!isTrip(data)) {
         throw new Error('The requested data file has incorrect structure or types.');
       }
 
-      const trip = {
+      const fullTrip = {
         ...data,
-        url,
+        ...trip,
         downloaded: true,
       };
 
       if (data.groups !== undefined) {
-        
-        trip.groups = [
+        const sortProperty = fullTrip.sortProperty ?? 'name';
+        const sortOrder = fullTrip.sortOrder ?? false;
+
+        data.groups.sort((a, b) => {
+          let aVal = getObjectProperty(a, sortProperty);
+          let bVal = getObjectProperty(b, sortProperty);
+
+          aVal = aVal === undefined ? (typeof bVal === "string" ? "" : 0) : aVal;
+          bVal = bVal === undefined ? (typeof aVal === "string" ? "" : 0) : bVal;
+
+          if (sortOrder) {
+            return aVal > bVal ? -1 : (aVal === bVal ? 0 : 1);
+          }
+
+          return aVal > bVal ? 1 : (aVal === bVal ? 0 : -1);
+        });
+
+        fullTrip.groups = [
           {
             id: 'all',
             name: 'Show all',
             media: data.groups?.flatMap((g) => g.media),
-            geoData: data.groups?.flatMap((g) => g.geoData !== undefined ? g.geoData : [])
+            geoData: data.groups?.flatMap((g) => (g.geoData !== undefined ? g.geoData : [])),
           },
           ...data.groups,
         ];
       }
 
-      return trip;
+      return fullTrip;
     } catch (err) {
       setError(`An error occurred while retrieving data: "${err as string}"`);
       console.error(err);
@@ -89,7 +106,7 @@ function App(): JSX.Element {
   }
 
   function updateAllTrips(trips: Trip[], trip: Trip): void {
-    const updatedTrips = (trips).map((t) => {
+    const updatedTrips = trips.map((t) => {
       if (t.id === trip.id) {
         t = trip;
       }
@@ -106,7 +123,7 @@ function App(): JSX.Element {
   }
 
   async function getFirstTrip(trips: Trip[]): Promise<void> {
-    const trip = await getTrip(trips[0].url);
+    const trip = await getTrip(trips[0]);
 
     if (trip !== undefined) {
       updateAllTrips(trips, trip);
@@ -131,7 +148,7 @@ function App(): JSX.Element {
       return await getFirstTrip(trips);
     }
 
-    const trip = await getTrip(trips[tripIndex].url);
+    const trip = await getTrip(trips[tripIndex]);
 
     if (trip === undefined) {
       return await getFirstTrip(trips);
@@ -232,7 +249,7 @@ function App(): JSX.Element {
     setIsLoading(true);
 
     if (!allTrips[tripIndex].downloaded) {
-      void getTrip(allTrips[tripIndex].url).then((trip) => {
+      void getTrip(allTrips[tripIndex]).then((trip) => {
         if (trip === undefined) {
           return;
         }

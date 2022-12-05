@@ -47,8 +47,11 @@ export function isTrip(obj: unknown): obj is Trip {
     typeof typedObj.id === 'string' &&
     typeof typedObj.name === 'string' &&
     (typeof typedObj.groups === 'undefined' ||
-      (Array.isArray(typedObj.groups) && typedObj.groups.every((e: any) => isGroup(e)))
-    );
+      (Array.isArray(typedObj.groups) && typedObj.groups.every((e: any) => isGroup(e)))) &&
+    (typeof typedObj.url === 'undefined' || typeof typedObj.url === 'string') &&
+    (typeof typedObj.downloaded === 'undefined' || typeof typedObj.downloaded === 'boolean') &&
+    (typeof typedObj.sortProperty === 'undefined' || typeof typedObj.sortProperty === 'string') &&
+    (typeof typedObj.sortOrder === 'undefined' || typeof typedObj.sortOrder === 'boolean');
 
   if (!isValid) {
     throw new Error(`Invalid object: ${JSON.stringify(obj)}`);

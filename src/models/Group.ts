@@ -19,7 +19,7 @@ export default interface Group {
   description?: string;
 
   /**
-   * Medias in the group.
+   * Media in the group.
    */
   media: MediaItem[];
 
@@ -32,4 +32,6 @@ export default interface Group {
    * Metadata that can be displayed in the description.
    */
   metadata?: { [key: string]: string | number };
+
+  [key: string]: any;
 }

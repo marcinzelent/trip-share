@@ -19,10 +19,22 @@ export default interface Trip {
   /**
    * URL to a JSON file containing data for the trip.
    */
-  url: string;
+  url?: string;
 
   /**
    * Property indicating if the trip data has been already downloaded.
    */
   downloaded: boolean;
+
+  /**
+   * A group property to use while sorting groups.
+   * Nested properties should be delimited with a dot.
+   * Default: name.
+   */
+  sortProperty?: string;
+
+  /**
+   * Sort order. true = descending, false = ascending.
+   */
+  sortOrder?: boolean;
 }

@@ -27,4 +27,12 @@ export function distanceBetween(latlng1: number[], latlng2: number[]): number {
   return R * c;
 }
 
-export default { secondsToTimeString, distanceBetween };
+export function getObjectProperty (object: any, path: string): any  {
+  if (object == null) {
+    return object;
+  }
+  const parts = path.split('.');
+  return parts.reduce((object, key) => object?.[key], object);
+};
+
+export default { secondsToTimeString, distanceBetween, getObjectProperty };
