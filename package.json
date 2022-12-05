@@ -61,6 +61,7 @@
       "last 1 safari version"
     ]
   },
+  "homepage": ".",
   "devDependencies": {
     "@types/ffprobe-static": "^2.0.1",
     "@types/fluent-ffmpeg": "^2.1.20",

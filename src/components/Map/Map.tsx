@@ -67,7 +67,10 @@ export default function Map({ group, handleMarkerClick }: Props): JSX.Element {
   function getClusterGroupIcon(markerCluster: MarkerCluster): DivIcon {
     const iconUrl = markerCluster
       .getAllChildMarkers()
-      .filter((m) => m.getIcon().options.iconUrl !== '/icons/thumb-placeholder.png')[0]
+      .filter(
+        (m) =>
+          m.getIcon().options.iconUrl !== `${process.env.PUBLIC_URL}/icons/thumb-placeholder.png`,
+      )[0]
       .getIcon().options.iconUrl;
 
     return new DivIcon({
@@ -95,7 +98,8 @@ export default function Map({ group, handleMarkerClick }: Props): JSX.Element {
             position={[mediaItem.latitude as number, mediaItem.longitude as number]}
             icon={
               new Icon({
-                iconUrl: mediaItem.thumbnail ?? '/icons/thumb-placeholder.png',
+                iconUrl:
+                  mediaItem.thumbnail ?? `${process.env.PUBLIC_URL}/icons/thumb-placeholder.png`,
                 iconSize: [36, 36],
                 className: styles.markerIcon,
               })
@@ -174,12 +178,22 @@ export default function Map({ group, handleMarkerClick }: Props): JSX.Element {
               <Marker
                 key={`start-marker-${group.id}-${i}`}
                 position={startCoords as [number, number]}
-                icon={new Icon({ iconUrl: '/icons/start.png', className: styles.iconShadow })}
+                icon={
+                  new Icon({
+                    iconUrl: `${process.env.PUBLIC_URL}/icons/start.png`,
+                    className: styles.iconShadow,
+                  })
+                }
               />
               <Marker
                 key={`finish-marker-${group.id}-${i}`}
                 position={finishCoords as [number, number]}
-                icon={new Icon({ iconUrl: '/icons/finish.png', className: styles.iconShadow })}
+                icon={
+                  new Icon({
+                    iconUrl: `${process.env.PUBLIC_URL}/icons/finish.png`,
+                    className: styles.iconShadow,
+                  })
+                }
               />
             </React.Fragment>
           );
