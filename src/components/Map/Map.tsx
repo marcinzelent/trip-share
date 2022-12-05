@@ -41,7 +41,7 @@ export default function Map({ group, handleMarkerClick }: Props): JSX.Element {
 
   const bounds = useMemo(() => {
     if (group === undefined || (group.geoData === undefined && displayedMedia.length === 0)) {
-      return new LatLngBounds([75, -145], [-52, 145]);
+      return;
     }
 
     const latitudes = displayedMedia.map((p) => p.latitude) as number[];
@@ -55,6 +55,10 @@ export default function Map({ group, handleMarkerClick }: Props): JSX.Element {
         longitudes.push(data.bbox[2]);
       }
     });
+
+    if (latitudes.length === 0 || longitudes.length === 0) {
+      return;
+    }
 
     const minLatitude = Math.min(...latitudes);
     const minLongitude = Math.min(...longitudes);
@@ -112,12 +116,18 @@ export default function Map({ group, handleMarkerClick }: Props): JSX.Element {
   }
 
   const mapBounds = useMemo(() => {
-    function MapBounds({ bounds }: { bounds: LatLngBounds }): JSX.Element {
+    function MapBounds({ bounds }: { bounds: LatLngBounds | undefined }): JSX.Element {
       const map = useMap();
 
-      if (map !== undefined) {
+      if (map === undefined) {
+        return <></>;
+      }
+
+      if (bounds !== undefined) {
         map.setView(bounds.getCenter());
         map.fitBounds(bounds, { padding: [40, 40] });
+      } else {
+        map.fitWorld();
       }
 
       return <></>;
