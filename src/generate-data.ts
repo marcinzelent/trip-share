@@ -93,6 +93,26 @@ function convertCoordinate(coordinate: number[], coordinateRef: string): number 
   }
 }
 
+function decodeExifUserComment(buffer: Buffer): string {
+  const encoding = buffer.toString('ascii', 0, 7);
+  
+  let index = 8;
+  for (let i = index; i < buffer.length; i++) {
+    if (buffer[i] !== 0) {
+      index = i;
+      break;
+    }
+  }
+
+  if (encoding === 'ASCII\0\0') {
+    return buffer.toString('utf8', index);
+  } else if (encoding === 'UNICODE') {
+    return buffer.toString('utf16le', index);
+  } else {
+    return buffer.toString();
+  }
+}
+
 async function checkIfFileExists(filepath: string): Promise<boolean> {
   try {
     await access(filepath, fsConstants.F_OK);
@@ -232,7 +252,7 @@ async function getPhotos(
         longitude,
         time: exifData.exif?.DateTimeOriginal,
         thumbnail: `${serverPath}/${relativePath}/thumb-${file.name}`,
-        caption: exifData.image?.ImageDescription,
+        caption: decodeExifUserComment(exifData.exif?.UserComment),
       });
     } catch (err) {
       console.error(`Could not process the file ${inputFile}.`);
